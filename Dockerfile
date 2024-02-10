@@ -7,7 +7,6 @@ WORKDIR /build
 COPY .npmrc package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
-RUN ls -al node_modules
 
 COPY src src
 COPY test test

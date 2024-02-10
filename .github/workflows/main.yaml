@@ -40,4 +40,4 @@ jobs:
             BUILDKIT_INLINE_CACHE=1
           cache-from: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:buildcache
           #cache-to: type=inline
-          cache-to: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:buildcache,mode=min
+          cache-to: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:buildcache,mode=max
