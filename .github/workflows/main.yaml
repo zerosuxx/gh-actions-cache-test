@@ -36,7 +36,6 @@ jobs:
           push: true
           tags: |
             ${{ env.APP_IMAGE_REPOSITORY }}:${{ steps.short-sha.outputs.sha }}
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
+            ${{ env.APP_IMAGE_REPOSITORY }}:latest
           cache-from: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:latest
           cache-to: type=inline
