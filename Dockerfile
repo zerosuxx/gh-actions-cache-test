@@ -9,13 +9,16 @@ COPY yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
-FROM packages AS build
+FROM base AS build
 
+WORKDIR /build
+
+COPY --from=packages /build/node_modules node_modules
 COPY src src
 COPY test test
 
 RUN yarn test
-RUN yarn install --production --ignore-scripts --prefer-offline --frozen-lockfile
+#RUN yarn install --production --ignore-scripts --prefer-offline --frozen-lockfile
 
 FROM base AS packed
 
