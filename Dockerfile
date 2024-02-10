@@ -4,7 +4,8 @@ FROM base AS packages
 
 WORKDIR /build
 
-COPY .npmrc package.json yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
