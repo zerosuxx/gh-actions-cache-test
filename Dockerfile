@@ -8,13 +8,7 @@ COPY .npmrc package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
-FROM base AS build
-
-WORKDIR /build
-
-COPY --from=packages /build/node_modules node_modules
-COPY --from=packages /build/package.json package.json
-COPY --from=packages /build/yarn.lock yarn.lock
+FROM packages AS build
 
 COPY src src
 COPY test test
