@@ -1,4 +1,6 @@
-FROM node:18-alpine AS b
+FROM node:18-alpine AS base
+
+FROM base AS packages
 
 WORKDIR /build
 
@@ -6,13 +8,15 @@ COPY .npmrc package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
+FROM packages AS build
+
 COPY src src
 COPY test test
 
 RUN yarn test
 RUN yarn install --production --ignore-scripts --prefer-offline --frozen-lockfile
 
-FROM node:18-alpine AS packed
+FROM base AS packed
 
 ENV NODE_ENV=production
 
