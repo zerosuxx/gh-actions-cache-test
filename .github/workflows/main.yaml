@@ -29,7 +29,7 @@ jobs:
 
       - name: Build
         run: |
-          docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --file Dockerfile --tag zerosuxx/gh-actions-cache-test:latest --target packed --push .
+          docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --file Dockerfile --cache-from zerosuxx/gh-actions-cache-test:latest --tag zerosuxx/gh-actions-cache-test:latest --target packed --push .
 
       # - name: Build and push
       #   uses: docker/build-push-action@v5
