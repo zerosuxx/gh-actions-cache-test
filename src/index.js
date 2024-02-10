@@ -6,4 +6,4 @@ const logger = winston.createLogger({
   ]
 });
 
-logger.info('hello 6');
+logger.info('hello 7');
