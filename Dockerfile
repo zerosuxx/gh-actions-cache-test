@@ -21,7 +21,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY --from=build --chown=node:node /build/node_modules node_modules
-COPY --from=build --chown=node:node /build/index.js index.js
+COPY --from=build --chown=node:node /build/src src
 
 RUN chown node:node /app
 
