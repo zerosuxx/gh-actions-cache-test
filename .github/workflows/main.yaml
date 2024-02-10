@@ -27,18 +27,22 @@ jobs:
 
       - uses: docker/setup-buildx-action@v3
 
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile
-          target: packed
-          push: true
-          tags: |
-            ${{ env.APP_IMAGE_REPOSITORY }}:${{ steps.short-sha.outputs.sha }}
-            ${{ env.APP_IMAGE_REPOSITORY }}:latest
-          build-args: |
-            BUILDKIT_INLINE_CACHE=1
-          cache-from: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:latest
-          cache-to: type=inline,mode=max
-          #cache-to: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:buildcache,mode=max
+      - name: Build
+        run: |
+          docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --file Dockerfile --tag zerosuxx/gh-actions-cache-test:latest --target packed --push .
+
+      # - name: Build and push
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: .
+      #     file: Dockerfile
+      #     target: packed
+      #     push: true
+      #     tags: |
+      #       ${{ env.APP_IMAGE_REPOSITORY }}:${{ steps.short-sha.outputs.sha }}
+      #       ${{ env.APP_IMAGE_REPOSITORY }}:latest
+      #     build-args: |
+      #       BUILDKIT_INLINE_CACHE=1
+      #     cache-from: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:latest
+      #     cache-to: type=inline,mode=max
+      #     #cache-to: type=registry,ref=${{ env.APP_IMAGE_REPOSITORY }}:buildcache,mode=max
