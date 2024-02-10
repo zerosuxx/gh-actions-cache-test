@@ -5,9 +5,9 @@ FROM base AS packages
 WORKDIR /build
 
 COPY package.json ./
-COPY yarn.lock ./
+COPY pnpm-lock.yaml ./
 
-RUN yarn install --frozen-lockfile
+RUN npm install -g pnpm && pnpm install
 
 FROM base AS build
 
