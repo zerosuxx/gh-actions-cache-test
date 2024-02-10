@@ -1,6 +1,4 @@
-FROM node:18-alpine AS base
-
-FROM base AS build
+FROM node:18-alpine AS build
 
 WORKDIR /build
 
@@ -14,7 +12,7 @@ COPY test test
 RUN yarn test
 RUN yarn install --production --ignore-scripts --prefer-offline --frozen-lockfile
 
-FROM base AS packed
+FROM node:18-alpine AS packed
 
 ENV NODE_ENV=production
 
