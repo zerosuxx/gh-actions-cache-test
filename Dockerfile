@@ -9,6 +9,7 @@ COPY .npmrc package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 COPY src src
+COPY test test
 
 RUN yarn test
 RUN yarn install --production --ignore-scripts --prefer-offline --frozen-lockfile
